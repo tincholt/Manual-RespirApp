@@ -14,14 +14,14 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.manualrespirapp.com/">
 <meta property="og:title" content="Manual De Usuario – RespirApp">
-<meta property="og:description" content="Manual de usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH. Guía completa con tutoriales en video.">
+<meta property="og:description" content="Manual De usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH. Guía completa con tutoriales en video.">
 <meta property="og:image" content="https://www.manualrespirapp.com/assets/logo.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://www.manualrespirapp.com/">
 <meta property="twitter:title" content="Manual De Usuario – RespirApp">
-<meta property="twitter:description" content="Manual de usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH. Guía completa con tutoriales en video.">
+<meta property="twitter:description" content="Manual De usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH. Guía completa con tutoriales en video.">
 <meta property="twitter:image" content="https://www.manualrespirapp.com/assets/logo.png">
 
 <!-- Schema.org structured data -->
@@ -31,7 +31,7 @@
   "@type": "WebSite",
   "name": "Manual RespirApp",
   "url": "https://www.manualrespirapp.com/",
-  "description": "Manual de usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH.",
+  "description": "Manual De usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH.",
   "publisher": {
     "@type": "Organization",
     "name": "RespirApp",
@@ -212,6 +212,21 @@
     }
 
     .logo img {
+        max-width: 180px;
+        max-height: 120px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Logo móvil (solo visible en dispositivos móviles) */
+    .logo-mobile {
+        display: none;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logo-mobile img {
         max-width: 180px;
         max-height: 120px;
         width: auto;
@@ -459,6 +474,11 @@
             display: block;
         }
         
+        /* Mostrar logo móvil */
+        .logo-mobile {
+            display: block;
+        }
+        
         h1 {
             font-size: 26px;
         }
@@ -552,6 +572,11 @@
             max-width: 140px;
             max-height: 100px;
         }
+        
+        .logo-mobile img {
+            max-width: 140px;
+            max-height: 100px;
+        }
     }
     
     /* Botón Ir Arriba */
@@ -637,14 +662,18 @@
 <!-- Contenido -->
 <main id="content" role="main">
 
-<h1 id="intro">Manual de Usuario – RespirApp</h1>
+<!-- Logo móvil (solo visible en dispositivos móviles) -->
+<div class="logo-mobile">
+    <img src="assets/logo.png" alt="Logo RespirApp">
+</div>
+
+<h1 id="intro">Manual De Usuario – RespirApp</h1>
 <p class="small-note">© 2025 RespirApp. Todos los derechos reservados.</p>
 
 <h2 id="general">1. Consideraciones Generales</h2>
 
 <p>
-RespirApp es una plataforma gamificada diseñada para el entrenamiento respiratorio en población pediátrica mediante el uso del sensor de flujo de MBMED® y su dispositivo FluxMed GrH.
-GrH. El software integra módulos de adquisición de señal, juegos terapéuticos, gestión de usuarios
+RespirApp es una plataforma gamificada diseñada para el entrenamiento respiratorio en población pediátrica mediante el uso del sensor de flujo de MBMED® y su dispositivo FluxMed GrH. El software integra módulos de adquisición de señal, juegos terapéuticos, gestión de usuarios
 y generación de reportes clínicos. Este manual describe las funciones principales para administradores, profesionales y pacientes, y provee enlaces a tutoriales de video que muestran el uso de cada
 componente.
 </p>
