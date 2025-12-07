@@ -581,9 +581,9 @@
 <h2 id="general">1. Consideraciones Generales</h2>
 
 <p>
-RespirApp es una plataforma gamificada diseñada para el entrenamiento respiratorio en población pediátrica mediante el uso de un sensor de flujo MBMED acoplado al dispositivo FluxMed
+RespirApp es una plataforma gamificada diseñada para el entrenamiento respiratorio en población pediátrica mediante el uso del sensor de flujo de MBMED® y su dispositivo FluxMed GrH.
 GrH. El software integra módulos de adquisición de señal, juegos terapéuticos, gestión de usuarios
-y generación de reportes clínicos. Este manual describe las funciones principales para administradores, profesionales y pacientes, y provee enlaces a tutoriales en video que muestran el uso de cada
+y generación de reportes clínicos. Este manual describe las funciones principales para administradores, profesionales y pacientes, y provee enlaces a tutoriales de video que muestran el uso de cada
 componente.
 </p>
 
@@ -593,9 +593,9 @@ componente.
     <div class="text">
         <ul>
         <li>Sistema operativo: Windows 10 o superior.</li>
-        <li>Python 3.10+ instalado.</li>
-        <li>Sensor de flujo MBMED® conectado al equipo FluxMed GrH.</li>
-        <li>Accesorios necesarios: boquilla espirométrica, filtro HME, clip nasal y, de ser necesario, adaptadores 3D.</li>
+        <li>Python 3.8+ instalado.</li>
+        <li>Sensor de flujo MBMED® junto al FluxMed GrH.</li>
+        <li>Accesorios Recomendados: boquilla espirométrica, filtro HME, clip nasal y obligatoriamente el adaptador 3D para Soplo Antillamas.</li>
         <li>Conexión USB disponible para establecer comunicación serie.</li>
         </ul>
     </div>
@@ -607,17 +607,17 @@ componente.
 
 <h3>1.2. Uso de Boquillas, Filtros y Adaptadores</h3>
 <p>
-Para garantizar mediciones respiratorias precisas, seguras y reproducibles, es indispensable utilizar correctamente los accesorios complementarios del sensor de flujo. A continuación se detallan los
-elementos necesarios según el diseño del hardware descrito en el documento técnico de RespirApp.
+Para garantizar mediciones respiratorias precisas, seguras y reproducibles, se recomienda utilizar los accesorios complementarios del sensor de flujo. A continuación se detallan los
+elementos útiles según el diseño técnico de RespirApp.
 </p>
 
 <h4>1.2.1. Boquillas</h4>
 <p>
-El sensor requiere el uso de una boquilla espirométrica para asegurar un sellado adecuado y
+El sensor puede utilizarse con una boquilla espirométrica para asegurar un sellado adecuado y
 evitar fugas durante la inspiración y espiración. Existen dos tipos compatibles:
 </p>
 <ul>
-<li>Boquillas espirométricas rígidas: permiten un flujo constante y son ideales para mediciones más precisas, como PEF o flujo laminar.</li>
+<li>Boquillas espirométricas rígidas: permiten un flujo constante y son ideales para mediciones más precisas, como PEF o flujo laminar, además de ser antibacteriales y mantener la bioseguridad necesaria.</li>
 <li>Boquillas descartables: recomendadas para uso clínico con múltiples pacientes, garantizan higiene y reducen el riesgo de contaminación cruzada.</li>
 </ul>
 
@@ -637,8 +637,7 @@ El filtro HME debe colocarse entre el sensor y la boquilla. Su función es:
 <li>mantener la resistencia aerodinámica estable durante la medición.</li>
 </ul>
 <p>
-El uso del filtro es obligatorio para preservar la integridad del equipo y asegurar la consistencia
-de los datos.
+El uso del filtro preserva la integridad del equipo y asegura la consistencia de los datos.
 </p>
 
 <div class="image-single">
@@ -648,10 +647,8 @@ de los datos.
 
 <h4>1.2.3. Clip Nasal</h4>
 <p>
-Para obtener mediciones correctas en maniobras espiratorias o de apneas, el paciente debe
-utilizar un clip nasal. Este evita fugas de aire por la nariz y asegura que todo el flujo sea dirigido
-hacia el sensor, aumentando la validez de los parámetros obtenidos (como PEF, flujo espiratorio
-sostenido o inspiratorio).
+Para obtener mediciones correctas en apneas, el paciente puede utilizar un clip nasal. Este evita fugas de aire por la nariz y asegura que todo el flujo sea dirigido
+hacia el sensor, aumentando la validez de los parámetros obtenidos.
 </p>
 
 <div class="image-single">
@@ -661,16 +658,15 @@ sostenido o inspiratorio).
 
 <h4>1.2.4. Adaptadores 3D</h4>
 <p>
-En casos donde el paciente no pueda utilizar las boquillas estándar, RespirApp provee adaptadores diseñados en 3D para:
+Los adaptadores 3D fueron diseñados para:
 </p>
 <ul>
-<li>ampliar el rango de aplicación del sensor,</li>
+<li>ampliar el rango de aplicación del sensor (esencial para Soplo Antillamas),</li>
 <li>mejorar el acople entre boquillas de distintos tamaños y el orificio fijo del dispositivo,</li>
-<li>permitir un uso seguro en pacientes más pequeños o con diferente capacidad bucal.</li>
+<li>permitir un uso seguro en pacientes con diferentes capacidades bucales.</li>
 </ul>
 <p>
-Su empleo solo es necesario cuando la boquilla estándar no genera un sellado adecuado.
-</p>
+
 
 <div class="image-single">
     <img src="assets/adaptadores.png" alt="Adaptadores 3D" style="max-width:300px; display:block; margin:20px auto;">
@@ -680,7 +676,7 @@ Su empleo solo es necesario cuando la boquilla estándar no genera un sellado ad
 
 <h2 id="usuarios">2. Gestión de Usuarios</h2>
 
-<h3>2.1. Perfiles de Usuario</h3>
+<h3>2.1. Perfiles De Usuario</h3>
 <p>
 RespirApp cuenta con tres tipos de usuarios, cada uno con permisos específicos:
 </p>
@@ -690,11 +686,9 @@ RespirApp cuenta con tres tipos de usuarios, cada uno con permisos específicos:
 <li><strong>Paciente:</strong> ejecuta rutinas asignadas.</li>
 </ul>
 
-<h3>2.2. Inicio de Sesión</h3>
+<h3>2.2. Inicio De Sesión</h3>
 <p>
-Al iniciar la aplicación, aparecerá la pantalla principal donde podrá ingresar con usuario y
-contraseña. Si es la primera vez, el administrador deberá crear las cuentas correspondientes desde
-el menú de configuración.
+Al iniciar la aplicación, aparecerá la pantalla principal donde podrá ingresar con usuario y contraseña. Si es la primera vez, la primera cuenta será asignada como administrador.
 </p>
 
 <h3>2.3. Editar Perfil</h3>
@@ -711,7 +705,7 @@ Funcionalidad disponible para todos los usuarios desde el menú de configuració
     <a href="https://youtu.be/fv-ywY6wCU0" target="_blank">Tutorial: Cambiar Contraseña</a>
 </div>
 
-<h3>2.5. Configuración de Volumen</h3>
+<h3>2.5. Configuración De Volumen</h3>
 <p>
 La aplicación permite ajustar el volumen del sistema desde el menú de configuración. El control de volumen está disponible para todos los usuarios y permite regular el nivel de audio de los juegos y notificaciones del sistema. El ajuste se realiza mediante un deslizador que permite un control preciso del volumen, desde silencio (0%) hasta volumen máximo (100%).
 </p>
@@ -721,7 +715,7 @@ Para ajustar el volumen, acceda al menú de configuración y utilice el control 
 
 <h3>2.6. Agregar Profesional</h3>
 <p>
-Opción disponible sólo para el administrador. Permite cargar un nuevo profesional al sistema.
+Opción disponible sólo para el administrador. Permite cargar un nuevo profesional al sistema desde la pantalla de inicio.
 </p>
 <div class="video-box">
     <a href="https://youtu.be/THCATtkuzOM" target="_blank">Tutorial: Agregar Profesional</a>
@@ -737,7 +731,7 @@ El administrador puede visualizar, filtrar y editar la información de profesion
 
 <h3>2.8. Agregar Paciente</h3>
 <p>
-Disponible para administrador y profesional. Permite registrar nuevos pacientes.
+Disponible para administrador y profesional. Permite registrar nuevos pacientes (ya que el administrador puede tener función de profesional de la salud).
 </p>
 <div class="video-box">
     <a href="https://youtu.be/kEzBD_hxnsQ" target="_blank">Tutorial: Agregar Paciente</a>
@@ -745,15 +739,15 @@ Disponible para administrador y profesional. Permite registrar nuevos pacientes.
 
 <h3>2.9. Reasignar Pacientes a Otros Profesionales</h3>
 <p>
-El administrador con permisos ampliados pueden reasignar un paciente a otro profesional en
+El administrador con permisos ampliados puede reasignar un paciente a otro profesional en
 caso de cambios en la estructura del equipo, rotación médica o necesidad de derivación. Esta función
 garantiza la continuidad del tratamiento y permite que el nuevo profesional acceda inmediatamente
-al historial, rutinas, informes y observaciones del paciente.
+al historial, rutinas, informes y observaciones del paciente. A su vez se pueden reasignar profesionales a pacientes.
 </p>
 <p>
 Para reasignar un paciente, se debe acceder a la sección “Ver Paciente”, seleccionar “Editar
 Profesional Asignado” y elegir el nuevo profesional de la lista disponible. Una vez confirmada la
-reasignación, el sistema actualiza automáticamente la relación profesional–paciente.
+reasignación, el sistema actualiza automáticamente la relación profesional–paciente. Todo esto con el rol de administrador.
 </p>
 <div class="video-box">
     <a href="https://youtu.be/nbhdOJwHDiY" target="_blank">Tutorial: Reasignar Pacientes</a>
@@ -765,7 +759,7 @@ reasignación, el sistema actualiza automáticamente la relación profesional–
 
 <h3>3.1. Crear Rutina</h3>
 <p>
-El profesional puede generar una rutina combinando ejercicios basados en los juegos terapéuticos. Cada ejercicio incluye parámetros como duración, umbrales de flujo y niveles de dificultad.
+El profesional puede generar una rutina combinando ejercicios basados en los juegos terapéuticos. Cada ejercicio incluye parámetros como duración y cantidad de repeticiones.
 </p>
 <div class="video-box">
     <a href="https://youtu.be/K8mLeYi7fho" target="_blank">Tutorial: Crear Rutina</a>
@@ -774,9 +768,10 @@ El profesional puede generar una rutina combinando ejercicios basados en los jue
 <h3>3.2. Ejecutar Rutina</h3>
 <p>
 El paciente accede a la sección “Iniciar Rutina”, donde se presentan los juegos en el orden
-definido por su profesional. Los resultados se guardan automáticamente y son accesibles para el
+definido por su profesional, si es que se tienen rutinas programadas para el día; en caso contrario aparece un mensaje informativo indicando que no hay rutinas disponibles. Los resultados se guardan automáticamente y son accesibles para el
 profesional.
 </p>
+
 <div class="image-single">
     <img src="assets/main_pat.png" alt="Ejecutar rutina" style="max-width:500px; display:block; margin:20px auto;">
 </div>
@@ -785,16 +780,15 @@ profesional.
 <h3>3.3. Resultados y Reportes</h3>
 <p>
 Los resultados de cada juego (curvas de flujo, métricas respiratorias, tiempo de apnea, PEF,
-etc.) se almacenan en formato JSONB y pueden exportarse a PDF. El profesional puede visualizar
-el progreso del paciente a través de gráficas comparativas y reportes clínicos.
+etc.) se almacenan en formato .jsonb en la base de datos y pueden exportarse a PDF. El profesional puede visualizar
+el progreso del paciente a través de gráficas y reportes clínicos.
 </p>
 
 <h3>3.4. Ver / Guardar Informes</h3>
 <p>
 La plataforma permite que el profesional visualice informes generados tras cada rutina o sesión.
-En estos informes se incluyen datos clave como curvas de flujo, valores de PEF, tiempos de apnea
-y resultados de los juegos. Además, existe la opción de exportar y guardar los informes en formato
-PDF para facilitar su impresión, archivado o envío a terceros intervinientes.
+En estos informes se incluyen datos y resultados clave de los juegos. Además, existe la opción de exportar y guardar los informes en formato
+PDF para facilitar su impresión, archivado o envío a terceros.
 </p>
 <div class="video-box">
     <a href="https://youtu.be/oCqQ8bjiNnk" target="_blank">Tutorial: Ver / Guardar Informes</a>
@@ -802,7 +796,7 @@ PDF para facilitar su impresión, archivado o envío a terceros intervinientes.
 
 <h3>3.5. Papelera de Rutinas</h3>
 <p>
-Cuando se elimina una rutina, esta no se borra permanentemente de inmediato, sino que se mueve a la papelera. Esta funcionalidad permite recuperar rutinas eliminadas por error y gestionar mejor el espacio de almacenamiento.
+Cuando se elimina una rutina, esta no se borra permanentemente de inmediato, sino que se mueve a la papelera (donde permanece 30 días hasta su borrado automático). Esta funcionalidad permite recuperar rutinas eliminadas por error y gestionar mejor el espacio de almacenamiento.
 </p>
 <p>
 Para acceder a la papelera, el profesional debe hacer clic en el botón de papelera ubicado en la pantalla principal. Se abrirá un panel lateral que muestra todas las rutinas eliminadas, organizadas por fecha de eliminación.
