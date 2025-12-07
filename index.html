@@ -135,27 +135,33 @@
     h3 {
         color: var(--primary-dark);
         font-size: 20px;
-        margin-top: 26px;
+        margin-top: 32px;
+        margin-bottom: 12px;
     }
 
     h4 {
         color: #002D5F;
         font-size: 17px;
-        margin-top: 18px;
+        margin-top: 24px;
+        margin-bottom: 10px;
     }
 
     p {
-        margin: 10px 0;
+        margin: 12px 0;
         text-align: justify;
     }
 
     ul {
         margin-top: 8px;
+        margin-bottom: 16px;
         text-align: justify;
+        padding-left: 24px;
     }
 
     li {
         text-align: justify;
+        margin-bottom: 8px;
+        line-height: 1.6;
     }
 
     hr {
@@ -166,9 +172,9 @@
 
     .video-box {
         background: #e8f4f9;
-        padding: 10px 12px;
+        padding: 12px 16px;
         border-left: 5px solid var(--primary);
-        margin: 12px 0;
+        margin: 16px 0;
         border-radius: 4px;
     }
 
@@ -398,11 +404,13 @@ Su empleo solo es necesario cuando la boquilla estándar no genera un sellado ad
 
 <h3>2.1. Perfiles de Usuario</h3>
 <p>
-RespirApp cuenta con tres tipos de usuarios, cada uno con permisos específicos:<br>
-Administrador: gestiona profesionales, pacientes, permisos y configuraciones globales.<br>
-Profesional: asigna rutinas, crea ejercicios, visualiza resultados y genera reportes.<br>
-Paciente: ejecuta rutinas asignadas.
+RespirApp cuenta con tres tipos de usuarios, cada uno con permisos específicos:
 </p>
+<ul>
+<li><strong>Administrador:</strong> gestiona profesionales, pacientes, permisos y configuraciones globales.</li>
+<li><strong>Profesional:</strong> asigna rutinas, crea ejercicios, visualiza resultados y genera reportes.</li>
+<li><strong>Paciente:</strong> ejecuta rutinas asignadas.</li>
+</ul>
 
 <h3>2.2. Inicio de Sesión</h3>
 <p>
@@ -491,7 +499,7 @@ profesional.
 <h3>3.3. Resultados y Reportes</h3>
 <p>
 Los resultados de cada juego (curvas de flujo, métricas respiratorias, tiempo de apnea, PEF,
-etc.) se almacenan en formato JSON.B y pueden exportarse a PDF. El profesional puede visualizar
+etc.) se almacenan en formato JSONB y pueden exportarse a PDF. El profesional puede visualizar
 el progreso del paciente a través de gráficas comparativas y reportes clínicos.
 </p>
 
@@ -572,9 +580,7 @@ Entrena flujo espiratorio sostenido. El paciente debe mantener un soplo continuo
 
 <h2 id="sensor">5. Configuración del Sensor</h2>
 <p>
-    El sensor debe conectarse vía USB antes de iniciar una rutina.  
-    El sistema detectará automáticamente el puerto y comenzará a recibir datos de flujo. 
-    Es necesario la calibración del sensor previo al comienzo de la rutina para que los datos obtenidos sean correctos. 
+El sensor debe conectarse vía USB antes de iniciar una rutina. El sistema detectará automáticamente el puerto y comenzará a recibir datos de flujo. Es necesario la calibración del sensor previo al comienzo de la rutina para que los datos obtenidos sean correctos.
 </p>
 
 <div class="image-single">
