@@ -294,41 +294,18 @@
         object-fit: contain;
     }
     
-    /* Barra desktop siempre visible en desktop */
+    /* Mostrar barra desktop cuando sidebar está cerrado */
     @media (min-width: 901px) {
         .mobile-header {
             display: none !important;
         }
         
-        /* Mostrar barra desktop siempre */
-        .desktop-header {
-            display: flex !important;
+        #sidebar.closed ~ .desktop-header {
+            display: flex;
         }
         
-        /* El sidebar debe empezar debajo de la barra desktop */
-        #sidebar {
-            top: 80px !important;
-            height: calc(100vh - 80px) !important;
-        }
-        
-        /* Reducir padding superior del sidebar para eliminar espacio extra */
-        #sidebar {
-            padding-top: 10px !important;
-        }
-        
-        /* Reducir margen del logo dentro del sidebar */
-        #sidebar .logo {
-            margin-bottom: 5px !important;
-        }
-        
-        /* Ajustar contenido para la barra desktop */
-        #content {
-            padding-top: 100px !important;
-        }
-        
-        /* Cuando el sidebar está abierto, ajustar margen izquierdo */
-        #sidebar:not(.closed) ~ #content {
-            margin-left: 280px;
+        #sidebar.closed ~ #content {
+            padding-top: 100px; /* Espacio para la barra desktop */
         }
     }
     
