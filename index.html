@@ -281,7 +281,8 @@
         flex: 1 1 160px !important;
     }
     
-    body.desktop-view .image-single img {
+    /* Solo aplicar 500px a figuras grandes (6-11) que tienen max-width:500px inline */
+    body.desktop-view .image-single img[style*="max-width:500px"] {
         max-width: 500px !important;
     }
     
@@ -594,7 +595,7 @@ Opción disponible sólo para el administrador. Permite cargar un nuevo profesio
     <a href="https://youtu.be/THCATtkuzOM" target="_blank">Tutorial: Agregar Profesional</a>
 </div>
 
-<h3>2.6. Buscar / Editar Profesional</h3>
+<h3>2.7. Buscar / Editar Profesional</h3>
 <p>
 El administrador puede visualizar, filtrar y editar la información de profesionales existentes.
 </p>
@@ -602,7 +603,7 @@ El administrador puede visualizar, filtrar y editar la información de profesion
     <a href="https://youtu.be/KdglBXG8_HM" target="_blank">Tutorial: Buscar / Editar Profesional</a>
 </div>
 
-<h3>2.7. Agregar Paciente</h3>
+<h3>2.8. Agregar Paciente</h3>
 <p>
 Disponible para administrador y profesional. Permite registrar nuevos pacientes.
 </p>
@@ -610,7 +611,7 @@ Disponible para administrador y profesional. Permite registrar nuevos pacientes.
     <a href="https://youtu.be/kEzBD_hxnsQ" target="_blank">Tutorial: Agregar Paciente</a>
 </div>
 
-<h3>2.8. Reasignar Pacientes a Otros Profesionales</h3>
+<h3>2.9. Reasignar Pacientes a Otros Profesionales</h3>
 <p>
 El administrador con permisos ampliados pueden reasignar un paciente a otro profesional en
 caso de cambios en la estructura del equipo, rotación médica o necesidad de derivación. Esta función
@@ -666,6 +667,26 @@ PDF para facilitar su impresión, archivado o envío a terceros intervinientes.
 <div class="video-box">
     <a href="https://youtu.be/oCqQ8bjiNnk" target="_blank">Tutorial: Ver / Guardar Informes</a>
 </div>
+
+<h3>3.5. Papelera de Rutinas</h3>
+<p>
+Cuando se elimina una rutina, esta no se borra permanentemente de inmediato, sino que se mueve a la papelera. Esta funcionalidad permite recuperar rutinas eliminadas por error y gestionar mejor el espacio de almacenamiento.
+</p>
+<p>
+Para acceder a la papelera, el profesional debe hacer clic en el botón de papelera ubicado en la pantalla principal. Se abrirá un panel lateral que muestra todas las rutinas eliminadas, organizadas por fecha de eliminación.
+</p>
+<p>
+Desde la papelera, el profesional puede realizar las siguientes acciones:
+</p>
+<ul>
+<li><strong>Recuperar rutina:</strong> permite restaurar una rutina eliminada a su estado original, haciéndola nuevamente disponible para asignación y ejecución.</li>
+<li><strong>Eliminar permanentemente:</strong> elimina de forma definitiva una rutina específica de la papelera. Esta acción no se puede deshacer.</li>
+<li><strong>Recuperar todas:</strong> restaura todas las rutinas de la papelera del profesional en una sola acción.</li>
+<li><strong>Vaciar papelera:</strong> elimina permanentemente todas las rutinas que se encuentran en la papelera. Esta acción requiere confirmación y no se puede deshacer.</li>
+</ul>
+<p>
+Es importante tener en cuenta que las rutinas eliminadas permanentemente no pueden ser recuperadas, por lo que se recomienda revisar cuidadosamente el contenido de la papelera antes de vaciarla.
+</p>
 
 <hr>
 
