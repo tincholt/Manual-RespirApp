@@ -101,6 +101,12 @@
         transition: opacity 0.3s ease;
     }
     
+    @media (max-width: 900px) {
+        .sidebar-overlay {
+            top: 80px; /* Empezar debajo de la barra móvil */
+        }
+    }
+    
     .sidebar-overlay.active {
         display: block;
         opacity: 1;
@@ -469,6 +475,8 @@
         #sidebar {
             transform: translateX(-100%);
             width: 260px;
+            top: 80px; /* Empezar debajo de la barra móvil */
+            height: calc(100vh - 80px); /* Ajustar altura */
         }
         #sidebar.open {
             transform: translateX(0);
@@ -538,6 +546,16 @@
         .mobile-header .logo-mobile img {
             max-width: 120px;
             max-height: 50px;
+        }
+        
+        /* Ajustar sidebar y overlay para barra más pequeña */
+        #sidebar {
+            top: 70px;
+            height: calc(100vh - 70px);
+        }
+        
+        .sidebar-overlay {
+            top: 70px;
         }
         
         h1 {
