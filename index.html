@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Manual De Usuario – RespirApp</title>
+<meta name="description" content="Manual de usuario de RespirApp - Plataforma gamificada para entrenamiento respiratorio pediátrico mediante sensor de flujo MBMED® y dispositivo FluxMed GrH. Guía completa con tutoriales en video.">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
 <link rel="icon" type="image/x-icon" href="assets/logo_login.ico">
 <style>
@@ -193,6 +194,24 @@
         outline: 2px solid #fff;
         outline-offset: 2px;
     }
+    
+    /* Skip link para navegación por teclado */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary);
+        color: #fff;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 10000;
+        border-radius: 0 0 4px 0;
+        font-weight: 600;
+    }
+    
+    .skip-link:focus {
+        top: 0;
+    }
 
     h1 {
         font-size: 32px;
@@ -262,6 +281,12 @@
 
     .video-box a:hover {
         color: var(--primary);
+    }
+    
+    .video-box a:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+        border-radius: 2px;
     }
 
     .small-note {
@@ -534,17 +559,20 @@
 
 <body>
 
+<!-- Skip link para navegación por teclado -->
+<a href="#content" class="skip-link">Saltar al contenido principal</a>
+
 <!-- Botón menú móvil -->
 <div id="menuToggle">
-    <button id="menuToggleBtn">☰</button>
+    <button id="menuToggleBtn" aria-label="Abrir menú de navegación">☰</button>
 </div>
 
 <!-- Botón toggle sidebar (desktop) -->
-<button id="sidebar-toggle-btn" style="display: none;">☰</button>
+<button id="sidebar-toggle-btn" style="display: none;" aria-label="Abrir o cerrar menú lateral">☰</button>
 
 <!-- Sidebar -->
-<div id="sidebar">
-    <button id="sidebar-close-btn" title="Cerrar menú">×</button>
+<nav id="sidebar" role="navigation" aria-label="Menú de navegación principal">
+    <button id="sidebar-close-btn" title="Cerrar menú" aria-label="Cerrar menú lateral">×</button>
     <div class="logo">
         <img src="assets/logo.png" alt="Logo RespirApp">
     </div>
@@ -570,10 +598,10 @@
     <div class="sidebar-section-title">Soporte</div>
     <a href="#problemas">6. Resolución de problemas</a>
     <a href="#contacto">7. Contacto y soporte</a>
-</div>
+</nav>
 
 <!-- Contenido -->
-<div id="content">
+<main id="content" role="main">
 
 <h1 id="intro">Manual de Usuario – RespirApp</h1>
 <p class="small-note">© 2025 RespirApp. Todos los derechos reservados.</p>
@@ -915,10 +943,10 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
 
 
 
-</div> <!-- cierre de #content -->
+</main> <!-- cierre de #content -->
 
 <!-- Botón Ir Arriba -->
-<button id="scrollToTop" style="display: none;">Ir Arriba</button>
+<button id="scrollToTop" style="display: none;" aria-label="Ir al inicio de la página">Ir Arriba</button>
 
 <script>
 // Detectar y aplicar vista de escritorio cuando el usuario solicita "Ver sitio web de escritorio"
@@ -961,9 +989,18 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     
     // Función para abrir/cerrar sidebar
     function toggleSidebar() {
+        const isClosed = sidebar.classList.contains('closed');
         sidebar.classList.toggle('closed');
+        // Actualizar atributos ARIA
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.setAttribute('aria-expanded', isClosed ? 'true' : 'false');
+            sidebarToggleBtn.setAttribute('aria-label', isClosed ? 'Cerrar menú lateral' : 'Abrir menú lateral');
+        }
+        if (sidebarCloseBtn) {
+            sidebarCloseBtn.setAttribute('aria-expanded', isClosed ? 'true' : 'false');
+        }
         // Guardar preferencia en localStorage
-        localStorage.setItem('sidebarClosed', sidebar.classList.contains('closed'));
+        localStorage.setItem('sidebarClosed', !isClosed);
     }
     
     // Botón toggle (desktop)
@@ -979,7 +1016,10 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     // Botón menú móvil
     if (menuToggleBtn) {
         menuToggleBtn.addEventListener('click', function() {
+            const isOpen = sidebar.classList.contains('open');
             sidebar.classList.toggle('open');
+            menuToggleBtn.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+            menuToggleBtn.setAttribute('aria-label', !isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
         });
     }
     
@@ -987,6 +1027,15 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     const sidebarClosed = localStorage.getItem('sidebarClosed') === 'true';
     if (sidebarClosed && window.innerWidth > 900) {
         sidebar.classList.add('closed');
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.setAttribute('aria-expanded', 'false');
+            sidebarToggleBtn.setAttribute('aria-label', 'Abrir menú lateral');
+        }
+    } else {
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.setAttribute('aria-expanded', 'true');
+            sidebarToggleBtn.setAttribute('aria-label', 'Cerrar menú lateral');
+        }
     }
     
     // Mostrar/ocultar botón toggle según tamaño de pantalla
