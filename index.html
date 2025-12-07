@@ -491,6 +491,44 @@
             max-height: 100px;
         }
     }
+    
+    /* Botón Ir Arriba */
+    #scrollToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 999;
+        transition: all 0.3s ease;
+        font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    #scrollToTop:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    
+    #scrollToTop:active {
+        transform: translateY(0);
+    }
+    
+    @media (max-width: 900px) {
+        #scrollToTop {
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 16px;
+            font-size: 13px;
+        }
+    }
 </style>
 </head>
 
@@ -885,6 +923,9 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
 
 </div> <!-- cierre de #content -->
 
+<!-- Botón Ir Arriba -->
+<button id="scrollToTop" style="display: none;">Ir Arriba</button>
+
 <script>
 // Detectar y aplicar vista de escritorio cuando el usuario solicita "Ver sitio web de escritorio"
 (function() {
@@ -984,6 +1025,30 @@ window.addEventListener('resize', function() {
         }
     }, 250);
 });
+
+// Botón Ir Arriba
+(function() {
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    if (!scrollToTopBtn) return;
+    
+    // Mostrar/ocultar botón según scroll
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+    
+    // Funcionalidad del botón
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+})();
 </script>
 
 </body>
