@@ -250,24 +250,6 @@
         outline-offset: 2px;
     }
     
-    /* Skip link para navegación por teclado */
-    .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: var(--primary);
-        color: #fff;
-        padding: 8px 16px;
-        text-decoration: none;
-        z-index: 10000;
-        border-radius: 0 0 4px 0;
-        font-weight: 600;
-    }
-    
-    .skip-link:focus {
-        top: 0;
-    }
-
     h1 {
         font-size: 32px;
         color: var(--primary);
@@ -614,9 +596,6 @@
 
 <body>
 
-<!-- Skip link para navegación por teclado -->
-<a href="#content" class="skip-link">Saltar al contenido principal</a>
-
 <!-- Botón menú móvil -->
 <div id="menuToggle">
     <button id="menuToggleBtn" aria-label="Abrir menú de navegación">☰</button>
@@ -684,7 +663,7 @@ componente.
     </div>
     <div class="image-single" style="text-align:center;">
         <img src="assets/fluxmedGRH.png" alt="Dispositivo FluxMed GrH" style="max-width:220px;">
-        <p class="small-note"><i>Figura 1: Equipo FluxMed GRH.</i></p>
+        <p class="small-note"><i>Figura 1: Equipo FluxMed GrH.</i></p>
     </div>
 </div>
 
