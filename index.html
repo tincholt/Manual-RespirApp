@@ -41,8 +41,69 @@
         border-right: 1px solid var(--border);
         padding: 20px;
         overflow-y: auto;
-        transition: transform 0.25s ease;
+        transition: transform 0.3s ease, left 0.3s ease;
         z-index: 1000;
+    }
+    
+    #sidebar.closed {
+        transform: translateX(-100%);
+    }
+    
+    #sidebar-toggle-btn {
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        z-index: 1001;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: left 0.3s ease, opacity 0.3s ease;
+        display: none;
+    }
+    
+    #sidebar-toggle-btn:hover {
+        background: var(--primary-dark);
+    }
+    
+    #sidebar.closed ~ #sidebar-toggle-btn {
+        left: 20px;
+    }
+    
+    #sidebar:not(.closed) ~ #sidebar-toggle-btn {
+        left: 300px;
+    }
+    
+    @media (min-width: 901px) {
+        #sidebar-toggle-btn {
+            display: block;
+        }
+    }
+    
+    #sidebar-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        color: var(--primary);
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+    }
+    
+    #sidebar-close-btn:hover {
+        background: #f0f0f0;
     }
 
     #sidebar h2 {
@@ -79,6 +140,13 @@
         margin-left: 280px;
         padding: 32px 40px;
         max-width: 980px;
+        transition: margin-left 0.3s ease;
+    }
+    
+    #sidebar.closed ~ #content {
+        margin-left: 0;
+        max-width: 100%;
+        padding-left: 60px;
     }
 
     /* Header / logo */
@@ -101,6 +169,13 @@
         left: 12px;
         top: 12px;
         z-index: 1100;
+    }
+    
+    /* Ocultar botón toggle en desktop cuando sidebar está visible */
+    @media (min-width: 901px) {
+        #menuToggle {
+            display: none !important;
+        }
     }
 
     #menuToggle button {
@@ -246,14 +321,29 @@
         width: 280px !important;
     }
     
+    body.desktop-view #sidebar.closed {
+        transform: translateX(-100%) !important;
+    }
+    
     body.desktop-view #content {
         margin-left: 280px !important;
         padding: 32px 40px !important;
         max-width: 980px !important;
+        transition: margin-left 0.3s ease !important;
+    }
+    
+    body.desktop-view #sidebar.closed ~ #content {
+        margin-left: 0 !important;
+        max-width: 100% !important;
+        padding-left: 60px !important;
     }
     
     body.desktop-view #menuToggle {
         display: none !important;
+    }
+    
+    body.desktop-view #sidebar-toggle-btn {
+        display: block !important;
     }
     
     body.desktop-view h1 {
@@ -411,8 +501,12 @@
     <button id="menuToggleBtn">☰</button>
 </div>
 
+<!-- Botón toggle sidebar (desktop) -->
+<button id="sidebar-toggle-btn" style="display: none;">☰</button>
+
 <!-- Sidebar -->
 <div id="sidebar">
+    <button id="sidebar-close-btn" title="Cerrar menú">×</button>
     <div class="logo">
         <img src="assets/logo.png" alt="Logo RespirApp">
     </div>
@@ -823,10 +917,55 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     }
 })();
 
-// Toggle del menú móvil
-document.getElementById("menuToggleBtn").addEventListener("click", function() {
-    document.getElementById("sidebar").classList.toggle("open");
-});
+// Funcionalidad de toggle del sidebar
+(function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    
+    // Función para abrir/cerrar sidebar
+    function toggleSidebar() {
+        sidebar.classList.toggle('closed');
+        // Guardar preferencia en localStorage
+        localStorage.setItem('sidebarClosed', sidebar.classList.contains('closed'));
+    }
+    
+    // Botón toggle (desktop)
+    if (sidebarToggleBtn) {
+        sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    }
+    
+    // Botón cerrar (dentro del sidebar)
+    if (sidebarCloseBtn) {
+        sidebarCloseBtn.addEventListener('click', toggleSidebar);
+    }
+    
+    // Botón menú móvil
+    if (menuToggleBtn) {
+        menuToggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+        });
+    }
+    
+    // Restaurar preferencia del sidebar al cargar
+    const sidebarClosed = localStorage.getItem('sidebarClosed') === 'true';
+    if (sidebarClosed && window.innerWidth > 900) {
+        sidebar.classList.add('closed');
+    }
+    
+    // Mostrar/ocultar botón toggle según tamaño de pantalla
+    function updateToggleButton() {
+        if (window.innerWidth > 900) {
+            if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'block';
+        } else {
+            if (sidebarToggleBtn) sidebarToggleBtn.style.display = 'none';
+        }
+    }
+    
+    window.addEventListener('resize', updateToggleButton);
+    updateToggleButton();
+})();
 
 // Detectar cambios en el tamaño de ventana
 let resizeTimer;
