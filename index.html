@@ -77,6 +77,18 @@
     html {
         scroll-behavior: smooth;
     }
+    
+    @media (min-width: 901px) {
+        html {
+            scroll-padding-top: 130px; /* Espacio para la barra desktop */
+        }
+    }
+    
+    @media (max-width: 900px) {
+        html {
+            scroll-padding-top: 100px; /* Espacio para la barra mobile */
+        }
+    }
 
     body {
         margin: 0;
@@ -123,7 +135,31 @@
         padding: 20px;
         overflow-y: auto;
         transition: transform 0.3s ease, left 0.3s ease;
-        z-index: 1000;
+        z-index: 999; /* Z-index menor que la barra */
+    }
+    
+    /* En desktop, el sidebar debe empezar exactamente donde termina la barra (60px) */
+    @media (min-width: 901px) {
+        #sidebar {
+            top: 60px !important;
+            height: calc(100vh - 60px) !important;
+            padding-top: 10px !important;
+        }
+        
+        /* Reducir márgenes superiores del primer elemento del sidebar */
+        #sidebar > *:first-child {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+        
+        #sidebar .logo {
+            margin-top: 0 !important;
+            margin-bottom: 5px !important;
+        }
+        
+        #sidebar h2 {
+            margin-top: 0 !important;
+        }
     }
     
     #sidebar.closed {
@@ -166,6 +202,7 @@
         padding: 32px 40px;
         max-width: 980px;
         transition: margin-left 0.3s ease;
+        padding-top: 32px; /* Padding normal por defecto */
     }
     
     #sidebar.closed ~ #content {
@@ -249,10 +286,12 @@
         background: #ffffff;
         border-bottom: 1px solid var(--border);
         padding: 12px 20px;
-        z-index: 1001;
+        z-index: 10000; /* Z-index muy alto para que esté siempre encima de todo */
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         align-items: center;
         gap: 16px;
+        height: 60px; /* Altura fija para la barra */
+        box-sizing: border-box;
     }
 
     .desktop-header button {
@@ -287,28 +326,92 @@
     }
 
     .desktop-header .logo-desktop img {
-        max-width: 160px;
-        max-height: 70px;
+        max-width: 140px;
+        max-height: 36px;
         width: auto;
         height: auto;
         object-fit: contain;
     }
     
-    /* Mostrar barra desktop cuando sidebar está cerrado */
+    /* Barra desktop siempre visible en desktop */
     @media (min-width: 901px) {
         .mobile-header {
             display: none !important;
         }
         
-        #sidebar.closed ~ .desktop-header {
-            display: flex;
+        /* Mostrar barra desktop siempre */
+        .desktop-header {
+            display: flex !important;
         }
         
+        /* El sidebar debe empezar exactamente donde termina la barra desktop (60px) */
+        #sidebar {
+            top: 60px !important;
+            height: calc(100vh - 60px) !important;
+            padding-top: 10px !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            padding-bottom: 20px !important;
+        }
+        
+        /* Reducir márgenes superiores del logo y primer elemento del sidebar */
+        #sidebar .logo {
+            margin-top: 0 !important;
+            margin-bottom: 5px !important;
+        }
+        
+        #sidebar h2 {
+            margin-top: 0 !important;
+            margin-bottom: 15px !important;
+        }
+        
+        #sidebar > *:first-child {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+        
+        /* Ajustar contenido para que empiece después de la barra desktop (60px + espacio para h1) */
+        #content {
+            padding-top: 130px !important;
+        }
+        
+        /* Asegurar que el título principal sea completamente visible */
+        #content #intro {
+            margin-top: 60px !important;
+            padding-top: 0 !important;
+            display: block !important;
+            visibility: visible !important;
+            line-height: 1.3 !important;
+        }
+        
+        /* Cuando el sidebar está abierto, ajustar margen izquierdo */
+        #sidebar:not(.closed) ~ #content {
+            margin-left: 280px;
+        }
+        
+        /* Cuando el sidebar está cerrado, no hay margen izquierdo */
         #sidebar.closed ~ #content {
-            padding-top: 100px; /* Espacio para la barra desktop */
+            margin-left: 0 !important;
         }
     }
     
+    /* Ajustar scroll para elementos con anclas considerando la barra superior */
+    h1[id],
+    h2[id],
+    h3[id],
+    h4[id] {
+        scroll-margin-top: 140px; /* Espacio para la barra superior + margen */
+    }
+    
+    @media (max-width: 900px) {
+        h1[id],
+        h2[id],
+        h3[id],
+        h4[id] {
+            scroll-margin-top: 100px; /* Espacio para la barra mobile + margen */
+        }
+    }
+
     h1 {
         font-size: 32px;
         color: var(--primary);
@@ -503,6 +606,7 @@
 
     /* Responsive */
     @media (max-width: 900px) {
+        /* En mobile, el sidebar debe estar cerrado por defecto */
         #sidebar {
             transform: translateX(-100%);
             width: 260px;
@@ -511,6 +615,11 @@
         }
         #sidebar.open {
             transform: translateX(0);
+        }
+        
+        /* Asegurar que la barra mobile siempre esté visible */
+        .mobile-header {
+            display: flex !important;
         }
         #content {
             margin-left: 0;
@@ -740,7 +849,7 @@ y generación de reportes clínicos. Este manual describe las funciones principa
 componente.
 </p>
 
-<h3>1.1. Requisitos del Sistema</h3>
+<h3>1.1. Requisitos Del Sistema</h3>
 
 <div class="req-layout">
     <div class="text">
@@ -1062,8 +1171,10 @@ Para soporte técnico, reportes de error o consultas relacionadas con el uso del
 puede comunicarse con el equipo desarrollador o con el profesional responsable del dispositivo.
 </p>
 <p>
-<strong>Email soporte:</strong> soporte@respirapp.com<br>
-<strong>Desarrollador:</strong> Equipo RespirApp – 2025
+<strong>Email soporte:</strong> <a href="mailto:soporte@respirapp.com" style="color: var(--primary); text-decoration: none;">soporte@respirapp.com</a>
+</p>
+<p style="margin-top: 30px; text-align: center; font-weight: 600; color: var(--primary);">
+Equipo RespirApp – 2025
 </p>
 
 
@@ -1112,6 +1223,24 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     const menuToggleBtn = document.getElementById('menuToggleBtn');
     const content = document.getElementById('content');
     
+    // Función para inicializar el padding del contenido
+    function initializeContentPadding() {
+        if (window.innerWidth > 900 && content) {
+            // Barra de 60px + 70px de espacio = 130px
+            content.style.paddingTop = '130px';
+        }
+    }
+    
+    // Ya no necesitamos ajustar la posición del sidebar, empieza desde arriba
+    
+    // Función para ajustar padding del contenido
+    function updateContentPadding() {
+        if (window.innerWidth > 900 && content) {
+            // Barra de 60px + 70px de espacio = 130px
+            content.style.paddingTop = '130px';
+        }
+    }
+    
     // Función para abrir/cerrar sidebar
     function toggleSidebar() {
         const isClosed = sidebar.classList.contains('closed');
@@ -1124,15 +1253,10 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
         // Guardar preferencia en localStorage
         localStorage.setItem('sidebarClosed', !isClosed);
         
-        // Ajustar padding del contenido según estado del sidebar
-        const content = document.getElementById('content');
-        if (content && window.innerWidth > 900) {
-            if (!isClosed) {
-                content.style.paddingTop = '32px';
-            } else {
-                content.style.paddingTop = '100px';
-            }
-        }
+        // Ajustar padding después de toggle
+        updateContentPadding();
+        
+        // Ajustar posición del sidebar después de toggle
     }
     
     // Botón toggle (desktop) - puede estar en la barra desktop o como botón flotante
@@ -1201,13 +1325,58 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
         });
     }
     
-    // Cerrar menú móvil al hacer clic en enlaces del sidebar
+    // Función para ajustar el scroll considerando la barra superior
+    function adjustScrollForHeader(targetId) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            let headerHeight = 0;
+            
+            if (window.innerWidth > 900) {
+                // En desktop, usar altura de la barra desktop
+                const desktopHeader = document.getElementById('desktop-header');
+                if (desktopHeader) {
+                    headerHeight = desktopHeader.offsetHeight;
+                }
+            } else {
+                // En mobile, usar altura de la barra mobile
+                const mobileHeader = document.getElementById('mobile-header');
+                if (mobileHeader) {
+                    headerHeight = mobileHeader.offsetHeight;
+                }
+            }
+            
+            // Calcular posición con offset para la barra
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // 20px de espacio extra
+            
+            // Hacer scroll suave
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Cerrar menú móvil al hacer clic en enlaces del sidebar y ajustar scroll
     if (sidebar) {
         const sidebarLinks = sidebar.querySelectorAll('a');
         sidebarLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                // Cerrar menú móvil si está abierto
                 if (window.innerWidth <= 900 && sidebar.classList.contains('open')) {
                     closeMobileMenu();
+                }
+                
+                // Obtener el href del enlace
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    // Prevenir el comportamiento por defecto
+                    e.preventDefault();
+                    
+                    // Ajustar scroll considerando la barra superior
+                    setTimeout(function() {
+                        adjustScrollForHeader(href);
+                    }, window.innerWidth <= 900 ? 300 : 0); // Esperar a que se cierre el menú en mobile
                 }
             });
         });
@@ -1216,39 +1385,82 @@ puede comunicarse con el equipo desarrollador o con el profesional responsable d
     // Restaurar preferencia del sidebar al cargar
     const sidebarClosed = localStorage.getItem('sidebarClosed') === 'true';
     
-    if (sidebarClosed && window.innerWidth > 900) {
-        sidebar.classList.add('closed');
-        if (sidebarToggleBtn) {
-            sidebarToggleBtn.setAttribute('aria-expanded', 'false');
-            sidebarToggleBtn.setAttribute('aria-label', 'Abrir menú lateral');
+    // En desktop, el sidebar debe estar abierto por defecto si no hay preferencia guardada
+    if (window.innerWidth > 900) {
+        if (sidebarClosed) {
+            sidebar.classList.add('closed');
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.setAttribute('aria-expanded', 'false');
+                sidebarToggleBtn.setAttribute('aria-label', 'Abrir menú lateral');
+            }
+        } else {
+            // Asegurar que el sidebar esté abierto (sin clase closed)
+            sidebar.classList.remove('closed');
+            if (sidebarToggleBtn) {
+                sidebarToggleBtn.setAttribute('aria-expanded', 'true');
+                sidebarToggleBtn.setAttribute('aria-label', 'Cerrar menú lateral');
+            }
         }
-        // Ajustar padding del contenido cuando sidebar está cerrado
-        if (content) {
-            content.style.paddingTop = '100px';
+        // Inicializar padding al restaurar preferencias
+        if (content && window.innerWidth > 900) {
+            updateContentPadding();
         }
     } else {
-        if (sidebarToggleBtn) {
-            sidebarToggleBtn.setAttribute('aria-expanded', 'true');
-            sidebarToggleBtn.setAttribute('aria-label', 'Cerrar menú lateral');
-        }
-        // Padding normal cuando sidebar está abierto
-        if (content && window.innerWidth > 900) {
-            content.style.paddingTop = '32px';
+        // En mobile, el sidebar debe estar cerrado por defecto
+        sidebar.classList.remove('open');
+        if (menuToggleBtn) {
+            menuToggleBtn.setAttribute('aria-expanded', 'false');
+            menuToggleBtn.setAttribute('aria-label', 'Abrir menú de navegación');
         }
     }
     
     // Ajustar padding al redimensionar ventana
     window.addEventListener('resize', function() {
         if (window.innerWidth > 900) {
-            const isClosed = sidebar.classList.contains('closed');
-            if (content) {
-                content.style.paddingTop = isClosed ? '100px' : '32px';
+            // En desktop, ajustar padding según estado del sidebar
+            updateContentPadding();
+            // Asegurar que la barra desktop esté visible
+            const desktopHeader = document.getElementById('desktop-header');
+            if (desktopHeader) {
+                desktopHeader.style.display = 'flex';
             }
+            // Ajustar posición del sidebar
         } else {
+            // En mobile, padding normal
             if (content) {
                 content.style.paddingTop = '';
             }
+            // Asegurar que la barra mobile esté visible
+            const mobileHeader = document.getElementById('mobile-header');
+            if (mobileHeader) {
+                mobileHeader.style.display = 'flex';
+            }
         }
+    });
+    
+    // Asegurar estado inicial correcto al cargar
+    window.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth > 900) {
+            // Asegurar que el sidebar no tenga clase closed si no hay preferencia
+            const sidebarClosed = localStorage.getItem('sidebarClosed') === 'true';
+            if (!sidebarClosed) {
+                sidebar.classList.remove('closed');
+            }
+            // Ajustar padding según estado inicial
+            updateContentPadding();
+        } else {
+            // En mobile: asegurar que la barra mobile esté visible
+            const mobileHeader = document.getElementById('mobile-header');
+            if (mobileHeader) {
+                mobileHeader.style.display = 'flex';
+            }
+            // Asegurar que el sidebar esté cerrado en mobile
+            sidebar.classList.remove('open');
+        }
+    });
+    
+    // Ajustar posición al redimensionar ventana
+    window.addEventListener('resize', function() {
     });
 })();
 
