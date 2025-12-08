@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /assets/
 
+# Sitemaps
 Sitemap: https://www.manualrespirapp.com/sitemap.xml
 
