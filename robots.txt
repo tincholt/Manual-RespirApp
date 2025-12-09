@@ -2,6 +2,15 @@ User-agent: *
 Allow: /
 Allow: /assets/
 
+# Favicon y manifest
+Allow: /favicon.svg
+Allow: /favicon-96x96.png
+Allow: /apple-touch-icon.png
+Allow: /web-app-manifest-192x192.png
+Allow: /web-app-manifest-512x512.png
+Allow: /site.webmanifest
+Allow: /favicon.ico
+
 # Sitemaps
 Sitemap: https://www.manualrespirapp.com/sitemap.xml
 
